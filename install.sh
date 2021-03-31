@@ -7,18 +7,12 @@ dir_app_name="MySysApp"
 MAIN_ACTIVITY="MainActivity"
 
 
-ADB="adb" # how you execute adb
+#ADB="adb" # how you execute adb
+ADB_SH="$ADB shell su -c"
 #ADB_SH="$ADB shell" # this script assumes using `adb root`. for `adb su` see `Caveats`
 # Install APK: using adb su
-$ADB_SH "mount -o rw,remount /system"
-$ADB_SH "chmod 777 /system/lib/"
-$ADB_SH "mkdir -p /sdcard/tmp" 2> /dev/null
-$ADB_SH "mkdir -p $apk_target_dir" 2> /dev/null
-$ADB push $apk_host /sdcard/tmp/$apk_name 2> /dev/null
-$ADB_SH "mv /sdcard/tmp/$apk_name $apk_target_sys"
-$ADB_SH "rmdir /sdcard/tmp" 2> /dev/null
 path_sysapp="/system/priv-app" # assuming the app is priviledged
-apk_host="./app/build/outputs/apk/app-debug.apk"
+apk_host="./app/build/outputs/apk/debug/app-debug.apk"
 apk_name=$dir_app_name".apk"
 apk_target_dir="$path_sysapp/$dir_app_name"
 apk_target_sys="$apk_target_dir/$apk_name"
@@ -29,10 +23,20 @@ rm -f $apk_host
 # Compile the APK: you can adapt this for production build, flavors, etc.
 ./gradlew assembleDebug || exit -1 # exit on failure
 
-# Install APK: using adb root
-$ADB root 2> /dev/null
-$ADB remount # mount system
-$ADB push $apk_host $apk_target_sys
+# # Install APK: using adb root
+# $ADB root 2> /dev/null
+# $ADB remount # mount system
+# $ADB push $apk_host $apk_target_sys
+
+# Install APK: using adb su
+$ADB_SH "mount -o rw,remount /system"
+$ADB_SH "chmod 777 /system/lib/"
+$ADB_SH "mkdir -p /sdcard/tmp" 2> /dev/null
+$ADB_SH "mkdir -p $apk_target_dir" 2> /dev/null
+$ADB push $apk_host /sdcard/tmp/$apk_name 2> /dev/null
+$ADB_SH "mv /sdcard/tmp/$apk_name $apk_target_sys"
+$ADB_SH "rmdir /sdcard/tmp" 2> /dev/null
+
 
 # Give permissions
 $ADB_SH "chmod 755 $apk_target_dir"
