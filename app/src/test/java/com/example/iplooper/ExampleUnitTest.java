@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.iplooper;
 
 import org.junit.Test;
 
