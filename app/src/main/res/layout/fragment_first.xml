@@ -5,25 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textview_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This app will loop on Ip with plane mode"
+                app:layout_constraintBottom_toTopOf="@id/button_first"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This app will loop on Ip with plane mode"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/button_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reset my ip until it is the good one"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_first" />
 
-    <Button
-        android:id="@+id/button_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset my ip until it is the good one"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first"
-        tools:text="loop on ip22" />
+
+            <Button
+                android:id="@+id/stop_loop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Stop the loop"
+                app:layout_constraintTop_toBottomOf="@id/textview_first"
+                app:layout_constraintVertical_bias="0.656"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="478dp">
+
+                <TextView
+                    android:id="@+id/ip_display2"
+                    android:layout_width="match_parent"
+                    android:layout_height="182dp"
+                    android:layout_centerInParent="true"
+                    android:text="Ip: ..."
+                    android:textSize="40sp"
+                    tools:layout_editor_absoluteX="95dp"
+                    tools:layout_editor_absoluteY="354dp" />
+            </LinearLayout>
+    </LinearLayout><!--Set size-->
 </androidx.constraintlayout.widget.ConstraintLayout>
